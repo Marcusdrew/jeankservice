@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import r1 from "@/assets/real-1.jpg";
-import r2 from "@/assets/real-2.jpg";
-import r3 from "@/assets/real-3.jpg";
-import r4 from "@/assets/real-4.jpg";
-import r5 from "@/assets/real-5.jpg";
-import r6 from "@/assets/real-6.jpg";
-import r7 from "@/assets/real-7.jpg";
-import r8 from "@/assets/real-8.jpg";
+import r1 from "@/assets/real-1-hd.jpg";
+import r2 from "@/assets/real-2-hd.jpg";
+import r3 from "@/assets/real-3-hd.jpg";
+import r4 from "@/assets/real-4-hd.jpg";
+import r5 from "@/assets/real-5-hd.jpg";
+import r6 from "@/assets/real-6-hd.jpg";
+import r7 from "@/assets/real-7-hd.jpg";
+import r8 from "@/assets/real-8-hd.jpg";
 
 export const Route = createFileRoute("/realisations")({
   component: Realisations,
