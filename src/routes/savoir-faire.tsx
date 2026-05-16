@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import sf from "@/assets/savoir-faire.jpg";
+import sf from "@/assets/real-7.jpg";
 
 export const Route = createFileRoute("/savoir-faire")({
   component: SavoirFaire,
