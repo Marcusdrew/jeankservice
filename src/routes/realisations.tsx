@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import catF from "@/assets/cat-fenetres.jpg";
-import catP from "@/assets/cat-portes.jpg";
-import catV from "@/assets/cat-verandas.jpg";
-import catG from "@/assets/cat-portails.jpg";
-import g1 from "@/assets/gallery-1.jpg";
-import g2 from "@/assets/gallery-2.jpg";
-import hero from "@/assets/hero-aluminum.jpg";
+import r1 from "@/assets/real-1.jpg";
+import r2 from "@/assets/real-2.jpg";
+import r3 from "@/assets/real-3.jpg";
+import r4 from "@/assets/real-4.jpg";
+import r5 from "@/assets/real-5.jpg";
+import r6 from "@/assets/real-6.jpg";
+import r7 from "@/assets/real-7.jpg";
+import r8 from "@/assets/real-8.jpg";
 
 export const Route = createFileRoute("/realisations")({
   component: Realisations,
@@ -25,14 +26,14 @@ export const Route = createFileRoute("/realisations")({
 type Cat = "Tout" | "Fenêtres" | "Portes" | "Vérandas" | "Portails";
 
 const items: { img: string; cat: Exclude<Cat, "Tout">; title: string; place: string }[] = [
-  { img: hero, cat: "Fenêtres", title: "Baie vitrée 4 vantaux", place: "Résidence privée — Ma Campagne" },
-  { img: catF, cat: "Fenêtres", title: "Châssis fixes anthracite", place: "Villa — Gombe" },
-  { img: catP, cat: "Portes", title: "Porte d'entrée vitrée", place: "Maison — Limete" },
-  { img: g2, cat: "Portes", title: "Devanture commerciale", place: "Boutique — Lingwala" },
-  { img: catV, cat: "Vérandas", title: "Véranda toit vitré", place: "Résidence — Mont-Ngafula" },
-  { img: g1, cat: "Vérandas", title: "Extension salon", place: "Villa — Binza" },
-  { img: catG, cat: "Portails", title: "Portail coulissant lames", place: "Concession — Kinsuka" },
-  { img: catG, cat: "Portails", title: "Clôture aluminium", place: "Particulier — Mbinza" },
+  { img: r2, cat: "Fenêtres", title: "Châssis noirs & garde-corps alu", place: "Villa R+2 — Kinshasa" },
+  { img: r4, cat: "Fenêtres", title: "Baie coulissante 2 vantaux", place: "Appartement avec vue — Kinshasa" },
+  { img: r8, cat: "Fenêtres", title: "Châssis blancs en série", place: "Immeuble R+3 — Kinshasa" },
+  { img: r5, cat: "Portes", title: "Devanture vitrée & porte battante", place: "Local commercial — Kinshasa" },
+  { img: r6, cat: "Portes", title: "Baie coulissante donnant sur balcon", place: "Résidence — Kinshasa" },
+  { img: r1, cat: "Vérandas", title: "Mur-rideau bleu réfléchissant", place: "Immeuble R+4 — Kinshasa" },
+  { img: r3, cat: "Vérandas", title: "Façade vitrée teintée", place: "Bâtiment commercial — Kinshasa" },
+  { img: r7, cat: "Portes", title: "Pose porte coulissante sur balcon", place: "Chantier en cours — Kinshasa" },
 ];
 
 const cats: Cat[] = ["Tout", "Fenêtres", "Portes", "Vérandas", "Portails"];
