@@ -77,10 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Artisan menuisier aluminium à Kinshasa : fenêtres, baies vitrées, portes, vérandas et portails sur mesure. Devis rapide au 0810688062." },
       { name: "author", content: "Jean Aluminium" },
       { property: "og:title", content: "Jean Aluminium — Menuiserie aluminium à Kinshasa" },
-      { property: "og:description", content: "Fenêtres, portes, vérandas et portails aluminium sur mesure. Kinsuka Pêcheur, Kinshasa." },
+      { property: "og:description", content: "Artisan menuisier aluminium à Kinshasa : fenêtres, baies vitrées, portes, vérandas et portails sur mesure. Devis rapide au 0810688062." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Jean Aluminium — Menuiserie aluminium à Kinshasa" },
+      { name: "twitter:description", content: "Artisan menuisier aluminium à Kinshasa : fenêtres, baies vitrées, portes, vérandas et portails sur mesure. Devis rapide au 0810688062." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/07b57f9e-3c97-49b0-9aed-8626bfdd5f86/id-preview-9cea83a7--e63fa52a-aca5-45ba-b0bb-daaf4a2cbed9.lovable.app-1778917948029.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/07b57f9e-3c97-49b0-9aed-8626bfdd5f86/id-preview-9cea83a7--e63fa52a-aca5-45ba-b0bb-daaf4a2cbed9.lovable.app-1778917948029.png" },
     ],
     links: [
       {
