@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Phone, MessageCircle, Hammer, Sparkles, ShieldCheck } from "lucide-react";
 import hero from "@/assets/real-2-hd.jpg";
-import catF from "@/assets/real-4.jpg";
-import catP from "@/assets/real-5.jpg";
-import catV from "@/assets/real-1.jpg";
-import catG from "@/assets/real-8.jpg";
+import catF from "@/assets/real-4-hd.jpg";
+import catP from "@/assets/real-5-hd.jpg";
+import catV from "@/assets/real-1-hd.jpg";
+import catG from "@/assets/real-8-hd.jpg";
 import { CONTACT } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/")({
