@@ -5,6 +5,7 @@ import catF from "@/assets/real-4-hd.jpg";
 import catP from "@/assets/real-5-hd.jpg";
 import catV from "@/assets/real-1-hd.jpg";
 import catG from "@/assets/real-8-hd.jpg";
+import catE from "@/assets/real-10.jpg";
 import { CONTACT } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/")({
@@ -25,7 +26,8 @@ const categories = [
   { img: catF, title: "Fenêtres & baies vitrées", desc: "Châssis aluminium thermolaqué, double vitrage, ouvertures coulissantes ou battantes." },
   { img: catP, title: "Portes & devantures", desc: "Portes d'entrée résidentielles, vitrines commerciales et portes de sécurité." },
   { img: catV, title: "Vérandas & extensions", desc: "Structures vitrées sur mesure pour agrandir et illuminer votre espace de vie." },
-  { img: catG, title: "Portails & clôtures", desc: "Portails battants, coulissants, garde-corps et clôtures aluminium." },
+  { img: catE, title: "Escaliers & garde-corps inox", desc: "Rampes d'escalier, garde-corps de balcon et terrasse en inox poli — verre ou barreaudage." },
+  { img: catG, title: "Portails & clôtures", desc: "Portails battants, coulissants et clôtures aluminium sur mesure." },
 ];
 
 function Home() {
@@ -49,7 +51,7 @@ function Home() {
             L'aluminium, <em className="not-italic text-ember">façonné</em> pour durer.
           </h1>
           <p className="mt-8 max-w-xl text-lg text-muted-foreground leading-relaxed">
-            Fenêtres, portes, vérandas et portails sur mesure. Chaque ouverture pensée, mesurée et posée par l'atelier de Jean — à Kinsuka Pêcheur, partout dans Kinshasa.
+            Aluminium et inox sur mesure : fenêtres, portes, vérandas, escaliers et garde-corps. Chaque pièce pensée, mesurée et posée par l'atelier de Jean Kakudji — à Kinsuka Pêcheur, partout dans Kinshasa.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <a href={`https://wa.me/${CONTACT.WHATSAPP}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-6 h-12 bg-ember text-ember-foreground font-medium hover:opacity-90 transition">
@@ -86,7 +88,7 @@ function Home() {
         <div className="flex items-end justify-between mb-12">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-ember mb-3">Spécialités</p>
-            <h2 className="font-display text-4xl lg:text-5xl max-w-2xl">Quatre métiers, une exigence.</h2>
+          <h2 className="font-display text-4xl lg:text-5xl max-w-2xl">Cinq métiers, une exigence.</h2>
           </div>
           <Link to="/realisations" className="hidden md:inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
             Toutes les réalisations <ArrowRight className="w-4 h-4" />
