@@ -5,9 +5,9 @@ export const Route = createFileRoute("/temoignages")({
   component: Temoignages,
   head: () => ({
     meta: [
-      { title: "Témoignages clients — Jean Aluminium" },
-      { name: "description", content: "Ce que disent les clients de Jean Aluminium à Kinshasa." },
-      { property: "og:title", content: "Témoignages — Jean Aluminium" },
+      { title: "Témoignages clients — JK Service" },
+      { name: "description", content: "Ce que disent les clients de JK Service à Kinshasa." },
+      { property: "og:title", content: "Témoignages — JK Service" },
       { property: "og:description", content: "Avis clients à Kinshasa." },
       { property: "og:url", content: "/temoignages" },
     ],

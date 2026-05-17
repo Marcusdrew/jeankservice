@@ -23,7 +23,7 @@ export function SiteLayout() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
             <span className="inline-block w-2 h-6 bg-ember group-hover:h-7 transition-all" />
-            <span className="font-display text-lg tracking-tight">Jean<span className="text-ember">.</span>Aluminium</span>
+            <span className="font-display text-lg tracking-tight">JK<span className="text-ember">.</span>Service</span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">
@@ -92,7 +92,7 @@ export function SiteLayout() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <span className="inline-block w-2 h-6 bg-ember" />
-              <span className="font-display text-lg">Jean<span className="text-ember">.</span>Aluminium</span>
+              <span className="font-display text-lg">JK<span className="text-ember">.</span>Service</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
               Menuiserie aluminium sur mesure à Kinshasa. Fenêtres, portes, vérandas, portails — pensés et posés par un artisan.
@@ -116,7 +116,7 @@ export function SiteLayout() {
           </div>
         </div>
         <div className="border-t border-border py-6 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Jean Aluminium — Kinshasa, RDC
+          © {new Date().getFullYear()} JK Service — Kinshasa, RDC
         </div>
       </footer>
     </div>

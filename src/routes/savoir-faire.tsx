@@ -6,9 +6,9 @@ export const Route = createFileRoute("/savoir-faire")({
   component: SavoirFaire,
   head: () => ({
     meta: [
-      { title: "Savoir-faire — Jean Aluminium Kinshasa" },
+      { title: "Savoir-faire — JK Service Kinshasa" },
       { name: "description", content: "L'atelier, la méthode et l'exigence d'un artisan aluminium à Kinshasa." },
-      { property: "og:title", content: "Savoir-faire — Jean Aluminium" },
+      { property: "og:title", content: "Savoir-faire — JK Service" },
       { property: "og:description", content: "L'atelier et la méthode de Jean." },
       { property: "og:url", content: "/savoir-faire" },
     ],
@@ -31,7 +31,7 @@ function SavoirFaire() {
           <p className="text-xs uppercase tracking-[0.3em] text-ember mb-4">Savoir-faire</p>
           <h1 className="font-display text-5xl lg:text-7xl text-balance leading-[0.95]">Un métier de patience et de précision.</h1>
           <p className="mt-8 text-lg text-muted-foreground leading-relaxed">
-            Jean travaille l'aluminium depuis des années. Du premier coup de mètre à la dernière vis, il pose lui-même — parce que la qualité d'une ouverture se joue au millimètre, pas au catalogue.
+            Jean Kakudji travaille l'aluminium et l'inox depuis des années. Du premier coup de mètre à la dernière vis, il pose lui-même — parce que la qualité d'une ouverture ou d'un garde-corps se joue au millimètre, pas au catalogue.
           </p>
         </div>
         <div className="aspect-[4/3] overflow-hidden">
