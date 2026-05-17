@@ -13,9 +13,9 @@ export const Route = createFileRoute("/realisations")({
   component: Realisations,
   head: () => ({
     meta: [
-      { title: "Réalisations — Jean Aluminium Kinshasa" },
+      { title: "Réalisations — JK Service Kinshasa" },
       { name: "description", content: "Galerie de réalisations aluminium : fenêtres, baies, portes, vérandas et portails posés à Kinshasa." },
-      { property: "og:title", content: "Réalisations — Jean Aluminium" },
+      { property: "og:title", content: "Réalisations — JK Service" },
       { property: "og:description", content: "Photos de nos derniers chantiers à Kinshasa." },
       { property: "og:url", content: "/realisations" },
     ],

@@ -6,9 +6,9 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
   head: () => ({
     meta: [
-      { title: "Contact — Jean Aluminium Kinshasa" },
-      { name: "description", content: "Joindre Jean Aluminium à Kinshasa : téléphone 0810688062, WhatsApp, atelier à Kinsuka Pêcheur." },
-      { property: "og:title", content: "Contact — Jean Aluminium" },
+      { title: "Contact — JK Service Kinshasa" },
+      { name: "description", content: "Joindre JK Service à Kinshasa : téléphone 0810688062, WhatsApp, atelier à Kinsuka Pêcheur." },
+      { property: "og:title", content: "Contact — JK Service" },
       { property: "og:description", content: "Téléphone, WhatsApp et adresse de l'atelier." },
       { property: "og:url", content: "/contact" },
     ],
@@ -51,7 +51,7 @@ function Contact() {
       </div>
 
       <form
-        action={`mailto:?subject=Demande de devis — Jean Aluminium`}
+        action={`mailto:?subject=Demande de devis — JK Service`}
         method="post"
         encType="text/plain"
         className="mt-16 grid md:grid-cols-2 gap-6 max-w-3xl"

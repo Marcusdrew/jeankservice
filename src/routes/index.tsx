@@ -11,9 +11,9 @@ export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
     meta: [
-      { title: "Jean Aluminium — Artisan menuisier aluminium à Kinshasa" },
+      { title: "JK Service — Artisan menuisier aluminium à Kinshasa" },
       { name: "description", content: "Fenêtres, baies vitrées, portes, vérandas et portails aluminium sur mesure à Kinshasa. Devis rapide au 0810688062." },
-      { property: "og:title", content: "Jean Aluminium — Artisan menuisier aluminium à Kinshasa" },
+      { property: "og:title", content: "JK Service — Artisan menuisier aluminium à Kinshasa" },
       { property: "og:description", content: "Réalisations aluminium sur mesure à Kinshasa." },
       { property: "og:url", content: "/" },
     ],
@@ -35,7 +35,7 @@ function Home() {
       <section className="relative min-h-[92vh] flex items-end overflow-hidden">
         <img
           src={hero}
-          alt="Baie vitrée aluminium contemporaine — réalisation Jean Aluminium"
+          alt="Baie vitrée aluminium contemporaine — réalisation JK Service"
           width={1920}
           height={1080}
           className="absolute inset-0 w-full h-full object-cover"

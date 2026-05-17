@@ -6,9 +6,9 @@ export const Route = createFileRoute("/savoir-faire")({
   component: SavoirFaire,
   head: () => ({
     meta: [
-      { title: "Savoir-faire — Jean Aluminium Kinshasa" },
+      { title: "Savoir-faire — JK Service Kinshasa" },
       { name: "description", content: "L'atelier, la méthode et l'exigence d'un artisan aluminium à Kinshasa." },
-      { property: "og:title", content: "Savoir-faire — Jean Aluminium" },
+      { property: "og:title", content: "Savoir-faire — JK Service" },
       { property: "og:description", content: "L'atelier et la méthode de Jean." },
       { property: "og:url", content: "/savoir-faire" },
     ],
