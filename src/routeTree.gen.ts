@@ -12,7 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TemoignagesRouteImport } from './routes/temoignages'
 import { Route as SavoirFaireRouteImport } from './routes/savoir-faire'
 import { Route as RealisationsRouteImport } from './routes/realisations'
+import { Route as OffresRouteImport } from './routes/offres'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AdminJkRouteImport } from './routes/admin-jk'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TemoignagesRoute = TemoignagesRouteImport.update({
@@ -30,9 +32,19 @@ const RealisationsRoute = RealisationsRouteImport.update({
   path: '/realisations',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OffresRoute = OffresRouteImport.update({
+  id: '/offres',
+  path: '/offres',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminJkRoute = AdminJkRouteImport.update({
+  id: '/admin-jk',
+  path: '/admin-jk',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -43,14 +55,18 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin-jk': typeof AdminJkRoute
   '/contact': typeof ContactRoute
+  '/offres': typeof OffresRoute
   '/realisations': typeof RealisationsRoute
   '/savoir-faire': typeof SavoirFaireRoute
   '/temoignages': typeof TemoignagesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin-jk': typeof AdminJkRoute
   '/contact': typeof ContactRoute
+  '/offres': typeof OffresRoute
   '/realisations': typeof RealisationsRoute
   '/savoir-faire': typeof SavoirFaireRoute
   '/temoignages': typeof TemoignagesRoute
@@ -58,7 +74,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin-jk': typeof AdminJkRoute
   '/contact': typeof ContactRoute
+  '/offres': typeof OffresRoute
   '/realisations': typeof RealisationsRoute
   '/savoir-faire': typeof SavoirFaireRoute
   '/temoignages': typeof TemoignagesRoute
@@ -67,16 +85,27 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin-jk'
     | '/contact'
+    | '/offres'
     | '/realisations'
     | '/savoir-faire'
     | '/temoignages'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/realisations' | '/savoir-faire' | '/temoignages'
+  to:
+    | '/'
+    | '/admin-jk'
+    | '/contact'
+    | '/offres'
+    | '/realisations'
+    | '/savoir-faire'
+    | '/temoignages'
   id:
     | '__root__'
     | '/'
+    | '/admin-jk'
     | '/contact'
+    | '/offres'
     | '/realisations'
     | '/savoir-faire'
     | '/temoignages'
@@ -84,7 +113,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminJkRoute: typeof AdminJkRoute
   ContactRoute: typeof ContactRoute
+  OffresRoute: typeof OffresRoute
   RealisationsRoute: typeof RealisationsRoute
   SavoirFaireRoute: typeof SavoirFaireRoute
   TemoignagesRoute: typeof TemoignagesRoute
@@ -113,11 +144,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RealisationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/offres': {
+      id: '/offres'
+      path: '/offres'
+      fullPath: '/offres'
+      preLoaderRoute: typeof OffresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin-jk': {
+      id: '/admin-jk'
+      path: '/admin-jk'
+      fullPath: '/admin-jk'
+      preLoaderRoute: typeof AdminJkRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -132,7 +177,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminJkRoute: AdminJkRoute,
   ContactRoute: ContactRoute,
+  OffresRoute: OffresRoute,
   RealisationsRoute: RealisationsRoute,
   SavoirFaireRoute: SavoirFaireRoute,
   TemoignagesRoute: TemoignagesRoute,
@@ -140,3 +187,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
