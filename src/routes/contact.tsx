@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Phone, MessageCircle, MapPin, Clock } from "lucide-react";
+import { Phone, MessageCircle, MapPin, Clock, Tag } from "lucide-react";
+import { useMemo, useState } from "react";
 import { CONTACT } from "@/components/SiteLayout";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { trackEvent } from "@/lib/tracker";
@@ -19,6 +20,37 @@ export const Route = createFileRoute("/contact")({
 });
 
 function Contact() {
+  const [code, setCode] = useState("");
+  const [applied, setApplied] = useState<{ code: string; label: string } | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const PROMOS: Record<string, string> = {
+    JK2026: "-10 % sur votre première commande",
+    BIENVENUE: "-5 % sur votre première commande",
+    KIN2026: "Pose offerte sur votre première commande",
+  };
+
+  const onApply = () => {
+    const key = code.trim().toUpperCase();
+    if (!key) return;
+    const label = PROMOS[key];
+    if (!label) {
+      setApplied(null);
+      setError("Ce code promo n'est pas valide.");
+      return;
+    }
+    setApplied({ code: key, label });
+    setError(null);
+    trackEvent("promo_used", { code: key });
+  };
+
+  const promoMessage = useMemo(() => {
+    const base = "Bonjour, je viens du site JK Service et j'aimerais échanger avec vous.";
+    return applied
+      ? `${base} J'utilise le code promo ${applied.code} (${applied.label}) pour ma première commande.`
+      : base;
+  }, [applied]);
+
   return (
     <section className="max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-24">
       <p className="text-xs uppercase tracking-[0.3em] text-ember mb-4">Contact</p>
@@ -50,6 +82,51 @@ function Contact() {
           <div className="font-display text-2xl leading-tight">Lun — Sam<br/>7h30 — 18h</div>
           <div className="text-sm text-muted-foreground mt-3">Déplacement gratuit pour mesure</div>
         </div>
+      </div>
+
+      {/* PROMO CODE — première commande via le site */}
+      <div className="mt-16 border border-border bg-card/30 p-8 lg:p-10 max-w-2xl">
+        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-ember mb-4">
+          <Tag className="w-4 h-4" /> Code promo — Première commande
+        </div>
+        <h2 className="font-display text-3xl mb-2">Vous avez un code ?</h2>
+        <p className="text-muted-foreground text-sm mb-6">
+          Réservé aux nouveaux clients passant commande via le site. Entrez votre code, il sera transmis automatiquement à Jean dans votre message WhatsApp.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <input
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            placeholder="Ex : JK2026"
+            className="flex-1 h-12 px-4 bg-background border border-border focus:border-ember outline-none uppercase tracking-wider"
+          />
+          <button
+            onClick={onApply}
+            className="h-12 px-6 bg-foreground text-background font-medium hover:opacity-90 transition"
+          >
+            Appliquer
+          </button>
+        </div>
+        {applied && (
+          <div className="mt-5 p-4 border border-ember/40 bg-ember/5 text-sm">
+            <div className="font-medium text-ember mb-1">Code {applied.code} appliqué</div>
+            <div className="text-muted-foreground">{applied.label}</div>
+            <a
+              href={buildWhatsAppLink(promoMessage)}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackEvent("whatsapp_click", { from: "/contact", promo: applied.code })}
+              className="mt-4 inline-flex items-center gap-2 px-5 h-11 bg-ember text-ember-foreground font-medium hover:opacity-90 transition"
+            >
+              <MessageCircle className="w-4 h-4" /> Profiter de l'offre sur WhatsApp
+            </a>
+          </div>
+        )}
+        {error && (
+          <div className="mt-5 p-4 border border-destructive/40 bg-destructive/5 text-sm text-destructive">
+            {error}
+          </div>
+        )}
       </div>
 
       <form
