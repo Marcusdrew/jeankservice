@@ -92,6 +92,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
     ],
+    scripts: [
+      { src: "https://www.googletagmanager.com/gtag/js?id=G-331491192", async: true },
+      {
+        children:
+          "window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-331491192', { anonymize_ip: true });",
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
