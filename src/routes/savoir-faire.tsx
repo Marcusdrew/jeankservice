@@ -90,14 +90,25 @@ function SavoirFaire() {
             Pourquoi remplacer le fer ou le bois par de l'aluminium et de l'inox ? Voici ce que ça change concrètement chez vous.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
-          {advantages.map((a) => (
-            <div key={a.t} className="bg-background p-8">
-              <a.icon className="w-6 h-6 text-ember mb-6" />
-              <h3 className="text-xl mb-3">{a.t}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{a.d}</p>
-            </div>
-          ))}
+        <div className="space-y-px bg-border border border-border">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px">
+            {advantages.slice(0, 3).map((a) => (
+              <div key={a.t} className="bg-background p-8">
+                <a.icon className="w-6 h-6 text-ember mb-6" />
+                <h3 className="text-xl mb-3">{a.t}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a.d}</p>
+              </div>
+            ))}
+          </div>
+          <div className="grid md:grid-cols-2 gap-px">
+            {advantages.slice(3).map((a) => (
+              <div key={a.t} className="bg-background p-8">
+                <a.icon className="w-6 h-6 text-ember mb-6" />
+                <h3 className="text-xl mb-3">{a.t}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a.d}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
