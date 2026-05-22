@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TemoignagesRouteImport } from './routes/temoignages'
 import { Route as SavoirFaireRouteImport } from './routes/savoir-faire'
 import { Route as RealisationsRouteImport } from './routes/realisations'
-import { Route as OffresRouteImport } from './routes/offres'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AdminJkRouteImport } from './routes/admin-jk'
 import { Route as IndexRouteImport } from './routes/index'
@@ -30,11 +29,6 @@ const SavoirFaireRoute = SavoirFaireRouteImport.update({
 const RealisationsRoute = RealisationsRouteImport.update({
   id: '/realisations',
   path: '/realisations',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OffresRoute = OffresRouteImport.update({
-  id: '/offres',
-  path: '/offres',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -57,7 +51,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin-jk': typeof AdminJkRoute
   '/contact': typeof ContactRoute
-  '/offres': typeof OffresRoute
   '/realisations': typeof RealisationsRoute
   '/savoir-faire': typeof SavoirFaireRoute
   '/temoignages': typeof TemoignagesRoute
@@ -66,7 +59,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin-jk': typeof AdminJkRoute
   '/contact': typeof ContactRoute
-  '/offres': typeof OffresRoute
   '/realisations': typeof RealisationsRoute
   '/savoir-faire': typeof SavoirFaireRoute
   '/temoignages': typeof TemoignagesRoute
@@ -76,7 +68,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin-jk': typeof AdminJkRoute
   '/contact': typeof ContactRoute
-  '/offres': typeof OffresRoute
   '/realisations': typeof RealisationsRoute
   '/savoir-faire': typeof SavoirFaireRoute
   '/temoignages': typeof TemoignagesRoute
@@ -87,7 +78,6 @@ export interface FileRouteTypes {
     | '/'
     | '/admin-jk'
     | '/contact'
-    | '/offres'
     | '/realisations'
     | '/savoir-faire'
     | '/temoignages'
@@ -96,7 +86,6 @@ export interface FileRouteTypes {
     | '/'
     | '/admin-jk'
     | '/contact'
-    | '/offres'
     | '/realisations'
     | '/savoir-faire'
     | '/temoignages'
@@ -105,7 +94,6 @@ export interface FileRouteTypes {
     | '/'
     | '/admin-jk'
     | '/contact'
-    | '/offres'
     | '/realisations'
     | '/savoir-faire'
     | '/temoignages'
@@ -115,7 +103,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminJkRoute: typeof AdminJkRoute
   ContactRoute: typeof ContactRoute
-  OffresRoute: typeof OffresRoute
   RealisationsRoute: typeof RealisationsRoute
   SavoirFaireRoute: typeof SavoirFaireRoute
   TemoignagesRoute: typeof TemoignagesRoute
@@ -142,13 +129,6 @@ declare module '@tanstack/react-router' {
       path: '/realisations'
       fullPath: '/realisations'
       preLoaderRoute: typeof RealisationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/offres': {
-      id: '/offres'
-      path: '/offres'
-      fullPath: '/offres'
-      preLoaderRoute: typeof OffresRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -179,7 +159,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminJkRoute: AdminJkRoute,
   ContactRoute: ContactRoute,
-  OffresRoute: OffresRoute,
   RealisationsRoute: RealisationsRoute,
   SavoirFaireRoute: SavoirFaireRoute,
   TemoignagesRoute: TemoignagesRoute,
@@ -187,3 +166,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

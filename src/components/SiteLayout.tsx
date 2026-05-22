@@ -124,7 +124,6 @@ export function SiteLayout() {
               {nav.map((n) => (
                 <li key={n.to}><Link to={n.to} className="text-muted-foreground hover:text-foreground">{n.label}</Link></li>
               ))}
-              <li><Link to="/offres" className="text-muted-foreground/60 hover:text-foreground text-xs">Offres de gestion</Link></li>
             </ul>
           </div>
         </div>
