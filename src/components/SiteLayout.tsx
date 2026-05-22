@@ -1,6 +1,8 @@
 import { Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { Phone, MessageCircle, MapPin, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { trackEvent } from "@/lib/tracker";
 
 const PHONE = "0810688062";
 const WHATSAPP = "243810688062"; // RDC indicatif
@@ -16,6 +18,14 @@ const nav = [
 export function SiteLayout() {
   const [open, setOpen] = useState(false);
   const path = useRouterState({ select: (s) => s.location.pathname });
+
+  useEffect(() => {
+    trackEvent("pageview", { path });
+  }, [path]);
+
+  const waHref = buildWhatsAppLink();
+  const onWa = () => trackEvent("whatsapp_click", { from: path });
+  const onPhone = () => trackEvent("phone_click", { from: path });
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
@@ -44,7 +54,8 @@ export function SiteLayout() {
 
           <div className="flex items-center gap-2">
             <a
-              href={`https://wa.me/${WHATSAPP}`}
+              href={waHref}
+              onClick={onWa}
               target="_blank"
               rel="noreferrer"
               className="hidden sm:inline-flex items-center gap-2 px-4 h-10 bg-ember text-ember-foreground text-sm font-medium hover:opacity-90 transition"
@@ -53,6 +64,7 @@ export function SiteLayout() {
             </a>
             <a
               href={`tel:${PHONE}`}
+              onClick={onPhone}
               className="inline-flex items-center gap-2 px-4 h-10 border border-steel/30 text-sm hover:bg-accent transition"
             >
               <Phone className="w-4 h-4" /> <span className="hidden sm:inline">{PHONE}</span>
@@ -101,8 +113,8 @@ export function SiteLayout() {
           <div>
             <h4 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">Contact</h4>
             <ul className="space-y-3 text-sm">
-              <li><a href={`tel:${PHONE}`} className="flex items-center gap-2 hover:text-ember"><Phone className="w-4 h-4" /> {PHONE}</a></li>
-              <li><a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-ember"><MessageCircle className="w-4 h-4" /> WhatsApp direct</a></li>
+              <li><a href={`tel:${PHONE}`} onClick={onPhone} className="flex items-center gap-2 hover:text-ember"><Phone className="w-4 h-4" /> {PHONE}</a></li>
+              <li><a href={waHref} onClick={onWa} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-ember"><MessageCircle className="w-4 h-4" /> WhatsApp direct</a></li>
               <li className="flex items-start gap-2 text-muted-foreground"><MapPin className="w-4 h-4 mt-0.5" /> Entrée Mimosa, Kinsuka Pêcheur — Kinshasa</li>
             </ul>
           </div>
@@ -112,6 +124,7 @@ export function SiteLayout() {
               {nav.map((n) => (
                 <li key={n.to}><Link to={n.to} className="text-muted-foreground hover:text-foreground">{n.label}</Link></li>
               ))}
+              <li><Link to="/offres" className="text-muted-foreground/60 hover:text-foreground text-xs">Offres de gestion</Link></li>
             </ul>
           </div>
         </div>
