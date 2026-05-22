@@ -7,6 +7,8 @@ import catV from "@/assets/real-1-hd.jpg";
 import catG from "@/assets/real-8-hd.jpg";
 import catE from "@/assets/real-10.jpg";
 import { CONTACT } from "@/components/SiteLayout";
+import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { trackEvent } from "@/lib/tracker";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -54,7 +56,7 @@ function Home() {
             Aluminium et inox sur mesure : fenêtres, portes, vérandas, escaliers et garde-corps. Chaque pièce pensée, mesurée et posée par l'atelier de Jean Kakudji — à Kinsuka Pêcheur, partout dans Kinshasa.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
-            <a href={`https://wa.me/${CONTACT.WHATSAPP}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-6 h-12 bg-ember text-ember-foreground font-medium hover:opacity-90 transition">
+            <a href={buildWhatsAppLink("Bonjour, je viens du site JK Service et j'aimerais demander un devis…")} onClick={() => trackEvent("whatsapp_click", { from: "/", cta: "hero" })} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-6 h-12 bg-ember text-ember-foreground font-medium hover:opacity-90 transition">
               <MessageCircle className="w-4 h-4" /> Demander un devis
             </a>
             <Link to="/realisations" className="inline-flex items-center gap-2 px-6 h-12 border border-steel/40 hover:bg-accent transition">
@@ -123,10 +125,10 @@ function Home() {
               <p className="mt-4 text-muted-foreground max-w-xl">Réponse rapide. Déplacement pour mesure et conseil partout dans Kinshasa.</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <a href={`tel:${CONTACT.PHONE}`} className="inline-flex items-center gap-2 px-6 h-12 bg-foreground text-background font-medium">
+              <a href={`tel:${CONTACT.PHONE}`} onClick={() => trackEvent("phone_click", { from: "/", cta: "bottom" })} className="inline-flex items-center gap-2 px-6 h-12 bg-foreground text-background font-medium">
                 <Phone className="w-4 h-4" /> {CONTACT.PHONE}
               </a>
-              <a href={`https://wa.me/${CONTACT.WHATSAPP}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-6 h-12 bg-ember text-ember-foreground font-medium">
+              <a href={buildWhatsAppLink()} onClick={() => trackEvent("whatsapp_click", { from: "/", cta: "bottom" })} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-6 h-12 bg-ember text-ember-foreground font-medium">
                 <MessageCircle className="w-4 h-4" /> WhatsApp
               </a>
             </div>

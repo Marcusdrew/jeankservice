@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Phone, MessageCircle, MapPin, Clock } from "lucide-react";
 import { CONTACT } from "@/components/SiteLayout";
+import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { trackEvent } from "@/lib/tracker";
 
 export const Route = createFileRoute("/contact")({
   component: Contact,
@@ -24,13 +26,13 @@ function Contact() {
       <p className="mt-6 max-w-xl text-muted-foreground">Appelez, écrivez ou passez à l'atelier. Réponse rapide, devis sans engagement.</p>
 
       <div className="mt-16 grid lg:grid-cols-2 gap-px bg-border">
-        <a href={`tel:${CONTACT.PHONE}`} className="bg-background p-10 group hover:bg-card transition">
+        <a href={`tel:${CONTACT.PHONE}`} onClick={() => trackEvent("phone_click", { from: "/contact" })} className="bg-background p-10 group hover:bg-card transition">
           <Phone className="w-7 h-7 text-ember mb-6" />
           <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">Téléphone</div>
           <div className="font-display text-3xl group-hover:text-ember transition">{CONTACT.PHONE}</div>
-          <div className="text-sm text-muted-foreground mt-3">Appel direct, du lundi au samedi</div>
+          <div className="text-sm text-muted-foreground mt-3">Appel direct — mentionnez le site pour un suivi prioritaire</div>
         </a>
-        <a href={`https://wa.me/${CONTACT.WHATSAPP}`} target="_blank" rel="noreferrer" className="bg-background p-10 group hover:bg-card transition">
+        <a href={buildWhatsAppLink()} onClick={() => trackEvent("whatsapp_click", { from: "/contact" })} target="_blank" rel="noreferrer" className="bg-background p-10 group hover:bg-card transition">
           <MessageCircle className="w-7 h-7 text-ember mb-6" />
           <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">WhatsApp</div>
           <div className="font-display text-3xl group-hover:text-ember transition">Envoyer un message</div>
