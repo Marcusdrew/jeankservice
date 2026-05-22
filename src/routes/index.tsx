@@ -99,7 +99,12 @@ function Home() {
 
         <div className="grid sm:grid-cols-2 gap-px bg-border">
           {categories.map((c, i) => (
-            <article key={c.title} className="group relative bg-background overflow-hidden">
+            <article
+              key={c.title}
+              className={`group relative bg-background overflow-hidden ${
+                i === categories.length - 1 && categories.length % 2 === 1 ? "sm:col-span-2" : ""
+              }`}
+            >
               <div className="aspect-[4/3] overflow-hidden">
                 <img src={c.img} alt={c.title} width={1280} height={960} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
               </div>
@@ -117,19 +122,40 @@ function Home() {
 
       {/* CTA */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
-        <div className="relative overflow-hidden border border-border p-10 lg:p-16">
-          <div className="absolute -top-20 -right-20 w-96 h-96 bg-ember/10 rounded-full blur-3xl" />
-          <div className="relative grid lg:grid-cols-[1fr_auto] gap-10 items-center">
+        <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-br from-card/60 via-background to-card/30 p-10 lg:p-16 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.4)]">
+          <div className="absolute -top-24 -right-24 w-[28rem] h-[28rem] bg-ember/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-32 -left-20 w-[24rem] h-[24rem] bg-[#25D366]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="relative grid lg:grid-cols-[1.2fr_auto] gap-10 items-center">
             <div>
-              <h2 className="font-display text-3xl lg:text-5xl text-balance max-w-2xl">Une idée, un chantier, un devis ? Parlons-en aujourd'hui.</h2>
-              <p className="mt-4 text-muted-foreground max-w-xl">Réponse rapide. Déplacement pour mesure et conseil partout dans Kinshasa.</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-ember mb-4">Discutons de votre projet</p>
+              <h2 className="font-display text-3xl lg:text-5xl text-balance max-w-2xl leading-[1.05]">
+                Une idée, un chantier, un devis ?{" "}
+                <span className="text-ember">Parlons-en aujourd'hui.</span>
+              </h2>
+              <p className="mt-5 text-muted-foreground max-w-xl leading-relaxed">
+                Réponse rapide. Déplacement pour mesure et conseil partout dans Kinshasa.
+              </p>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <a href={`tel:${CONTACT.PHONE}`} onClick={() => trackEvent("phone_click", { from: "/", cta: "bottom" })} className="inline-flex items-center gap-2 px-6 h-12 bg-foreground text-background font-medium">
-                <Phone className="w-4 h-4" /> {CONTACT.PHONE}
+            <div className="flex flex-col sm:flex-row lg:flex-col gap-3 lg:min-w-[18rem]">
+              <a
+                href={buildWhatsAppLink()}
+                onClick={() => trackEvent("whatsapp_click", { from: "/", cta: "bottom" })}
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center justify-center gap-3 px-6 h-14 rounded-full bg-gradient-to-r from-[#25D366] to-[#1ebe57] text-white font-medium shadow-lg shadow-[#25D366]/25 hover:-translate-y-0.5 transition"
+              >
+                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/15">
+                  <MessageCircle className="w-4 h-4" />
+                </span>
+                Écrire sur WhatsApp
               </a>
-              <a href={buildWhatsAppLink()} onClick={() => trackEvent("whatsapp_click", { from: "/", cta: "bottom" })} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-6 h-12 bg-ember text-ember-foreground font-medium">
-                <MessageCircle className="w-4 h-4" /> WhatsApp
+              <a
+                href={`tel:${CONTACT.PHONE}`}
+                onClick={() => trackEvent("phone_click", { from: "/", cta: "bottom" })}
+                className="inline-flex items-center justify-center gap-3 px-6 h-14 rounded-full border border-border/70 bg-card/40 backdrop-blur hover:bg-accent transition font-medium"
+              >
+                <Phone className="w-4 h-4 text-ember" />
+                {CONTACT.PHONE}
               </a>
             </div>
           </div>
