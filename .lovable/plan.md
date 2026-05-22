@@ -1,46 +1,74 @@
-# Site vitrine — Jean Aluminium
 
-Site vitrine professionnel pour Jean, menuisier aluminium à Kinshasa. Objectif : démontrer son savoir-faire à travers ses réalisations et déclencher des prises de contact (téléphone, WhatsApp).
+## Ce qu'on va ajouter au site JK Service
 
-## Structure du site
+### 1. Nouvelle page "Offres & Tarifs" (`/offres`)
 
-Site multi-pages (routes séparées pour le SEO et le partage), navigation claire en haut, appel à l'action présent partout.
+Page publique présentant **2 formules d'abonnement mensuel** (gestion du site) :
 
-- **/** — Accueil : hero impactant avec une réalisation phare, présentation rapide des 4 spécialités, aperçu galerie, témoignages, CTA contact
-- **/realisations** — Galerie filtrable par catégorie (Fenêtres & baies, Portes & devantures, Vérandas, Portails & clôtures)
-- **/savoir-faire** — À propos de Jean, son parcours, sa méthode, ses matériaux, sa zone d'intervention
-- **/temoignages** — Avis clients regroupés
-- **/contact** — Coordonnées, carte de la zone, lien direct téléphone + WhatsApp, formulaire simple (mailto pour commencer, pas de backend)
+**Formule Essentielle — 20 $/mois**
+- Hébergement & nom de domaine inclus
+- Mise à jour des photos de réalisations (jusqu'à 5/mois)
+- Ajout de nouveaux témoignages
+- Suivi des visites & contacts WhatsApp
+- Réponse aux petites modifications (texte, prix)
+- Support WhatsApp sous 48h
 
-## Contenu prévu
+**Formule Pro — 45 $/mois**
+- Tout ce qui est dans Essentielle
+- Photos illimitées + retouche
+- Nouvelles sections / pages à la demande
+- Rapport mensuel détaillé (visites, clics, contacts)
+- Optimisation Google (SEO local Kinshasa)
+- Support prioritaire sous 12h
+- 1 campagne promo / mois (bannière site)
 
-- **Entreprise** : Jean Aluminium
-- **Localisation** : Kinshasa — bureau à l'entrée Mimosa, Kinsuka Pêcheur — intervient partout dans la ville
-- **Téléphone / WhatsApp** : 0810688062
-- **Spécialités** : Fenêtres & baies vitrées · Portes & devantures · Vérandas & extensions · Portails & clôtures
-- Photos de réalisations : placeholders générés au démarrage, à remplacer ensuite par les vraies photos de Jean
+Section frais de création one-shot mentionnée en haut (à partir de 200 $).
 
-## Direction visuelle
+### 2. Section "Code Promo" sur la page Offres
 
-Tu as choisi d'explorer 3 directions. Dès que ce plan est approuvé, je génère 3 maquettes distinctes (par exemple : industriel premium / architectural épuré / artisan chaleureux) et tu choisis celle qu'on construit.
+Encadré visible où le visiteur entre un code promo (ex: `JK2026`) → affiche une réduction (-15 % le premier mois ou -50 $ sur la création). Logique côté client uniquement (codes en dur dans le fichier) — pas besoin de backend pour ça. Au clic "Profiter de l'offre", ouvre WhatsApp avec un message pré-rempli qui inclut le code utilisé.
 
-## CTA & conversion
+### 3. Bouton WhatsApp pré-rempli (partout sur le site)
 
-- Bouton "Appeler" (tel:) et "WhatsApp" (wa.me) visibles en permanence dans le header et le footer
-- CTA répété en bas de chaque page
-- Photos plein écran cliquables sur la galerie pour montrer le détail du travail
+Tous les liens `wa.me/...` actuels passent à un format avec message pré-rempli :
+
+> "Bonjour, je viens du site JK Service et j'aimerais échanger avec vous au sujet de…"
+
+Implémenté via une **fonction utilitaire** `buildWhatsAppLink(context)` dans `src/lib/whatsapp.ts` pour qu'on puisse personnaliser le message selon la page (Contact, Réalisations, Offres avec code promo, etc.).
+
+Fichiers concernés : `SiteLayout.tsx`, `contact.tsx`, `index.tsx`, `realisations.tsx`, `temoignages.tsx`, `savoir-faire.tsx`, nouvelle page `offres.tsx`.
+
+### 4. Tracker simple + page admin cachée
+
+**Tracker** (sans backend, stockage `localStorage` côté navigateur Jean/toi) :
+- Compte chaque visite de page (avec route + date)
+- Compte chaque clic sur bouton WhatsApp
+- Compte chaque clic sur bouton "Appeler"
+- Stocke les 200 derniers événements
+
+Implémenté via un hook `useTracker()` + helper `trackEvent(type, meta)`.
+
+**Page admin** : `/admin-jk` (URL non listée dans le menu)
+- Affiche : total visites / 7 derniers jours / 30 jours
+- Clics WhatsApp et Appels (avec pourcentage de conversion)
+- Liste des dernières actions
+- Bouton "Réinitialiser les stats"
+- Petit mot de passe simple en clair côté client (`JKadmin2026`) — pas une vraie sécurité, juste pour éviter qu'un visiteur tombe dessus par hasard
+
+> Limite honnête : ce tracker est **côté navigateur**, donc les stats ne sont visibles que sur l'appareil qui a consulté la page admin. Pour des stats globales (tous visiteurs confondus), il faudra plus tard installer Google Analytics gratuit ou activer Lovable Cloud — je te le proposerai après que Jean ait validé cette V1.
+
+### 5. Lien discret vers `/offres` dans le footer
+
+Pas dans le menu principal (c'est un site pour Jean, pas pour toi) — juste un petit lien "Offres de gestion" dans le footer, utile quand tu envoies l'URL à d'autres prospects artisans.
+
+---
 
 ## Détails techniques
 
-- TanStack Start (déjà en place) avec routes fichier dans `src/routes/`
-- Une route par section pour SEO et partage social (meta title + description uniques par page)
-- Tailwind v4, tokens de design dans `src/styles.css`
-- Images de réalisations générées via le générateur d'images, stockées dans `src/assets/`
-- Pas de backend pour l'instant : le formulaire de contact ouvre l'appli mail. Si plus tard tu veux recevoir les demandes dans une base de données + email, on activera Lovable Cloud
-- Responsive mobile-first (beaucoup de prospects ouvriront depuis leur téléphone)
-
-## Prochaine étape après approbation
-
-1. Génération de 3 directions visuelles à comparer
-2. Tu choisis ta préférée
-3. Construction complète du site avec la direction retenue
+- Nouveau fichier `src/lib/whatsapp.ts` : `buildWhatsAppLink({ message?: string }): string`
+- Nouveau fichier `src/lib/tracker.ts` : `trackEvent`, `getStats`, `resetStats` (localStorage)
+- Nouveau hook `src/hooks/use-page-tracking.ts` : appelé dans `SiteLayout` pour tracker chaque navigation
+- Nouvelles routes : `src/routes/offres.tsx`, `src/routes/admin-jk.tsx`
+- Modif `SiteLayout.tsx` : remplacer les liens WhatsApp directs par `buildWhatsAppLink()` + ajouter tracking sur les clics tel/whatsapp
+- Modif des autres routes : même remplacement des liens WhatsApp
+- Pas de backend, pas de dépendances ajoutées
