@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Activity, MessageCircle, Phone, RefreshCw, Tag, Trash2 } from "lucide-react";
+import { Activity, BarChart3, MessageCircle, Phone, RefreshCw, Tag, Trash2 } from "lucide-react";
 import { getEvents, resetEvents, summarize, type TrackEvent } from "@/lib/tracker";
 
 export const Route = createFileRoute("/admin-jk")({
@@ -81,6 +81,14 @@ function Admin() {
           </p>
         </div>
         <div className="flex gap-2">
+          <a
+            href="https://analytics.google.com/analytics/web/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 h-10 bg-ember text-ember-foreground text-sm font-medium hover:opacity-90"
+          >
+            <BarChart3 className="w-4 h-4" /> Ouvrir Google Analytics
+          </a>
           <button onClick={() => setTick((t) => t + 1)} className="inline-flex items-center gap-2 px-4 h-10 border border-border text-sm hover:bg-accent">
             <RefreshCw className="w-4 h-4" /> Rafraîchir
           </button>
