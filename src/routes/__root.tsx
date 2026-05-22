@@ -93,10 +93,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     scripts: [
-      { src: "https://www.googletagmanager.com/gtag/js?id=G-331491192", async: true },
+      { src: "https://www.googletagmanager.com/gtag/js?id=G-K2K46S6292", async: true },
       {
         children:
-          "window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-331491192', { anonymize_ip: true });",
+          "window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-K2K46S6292', { anonymize_ip: true });",
       },
     ],
   }),
