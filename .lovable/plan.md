@@ -1,74 +1,78 @@
+## Objectif
 
-## Ce qu'on va ajouter au site JK Service
+Produire un **PDF de proforma** prêt à envoyer par WhatsApp/email à Jean KAKUDJI, présentant l'offre de création + abonnement du site **jeankservice.lovable.app**, avec une offre de lancement attractive pour signer rapidement.
 
-### 1. Nouvelle page "Offres & Tarifs" (`/offres`)
+Ce n'est **pas une modification du site** — c'est un livrable (`/mnt/documents/proforma-jk-service.pdf`).
 
-Page publique présentant **2 formules d'abonnement mensuel** (gestion du site) :
+## Contenu de la proforma
 
-**Formule Essentielle — 20 $/mois**
-- Hébergement & nom de domaine inclus
-- Mise à jour des photos de réalisations (jusqu'à 5/mois)
-- Ajout de nouveaux témoignages
-- Suivi des visites & contacts WhatsApp
-- Réponse aux petites modifications (texte, prix)
-- Support WhatsApp sous 48h
+**En-tête**
+- Émetteur : Jenovic ILAMBU — Conception & gestion de sites web
+- Client : Jean KAKUDJI — JK Service (Kinshasa)
+- N° proforma : `JKS-2026-001`, date du jour, validité 15 jours
 
-**Formule Pro — 45 $/mois**
-- Tout ce qui est dans Essentielle
-- Photos illimitées + retouche
-- Nouvelles sections / pages à la demande
-- Rapport mensuel détaillé (visites, clics, contacts)
-- Optimisation Google (SEO local Kinshasa)
-- Support prioritaire sous 12h
-- 1 campagne promo / mois (bannière site)
+**Objet**
+> Création + gestion du site vitrine professionnel **jeankservice.lovable.app** (portes, fenêtres, portails & vérandas aluminium).
 
-Section frais de création one-shot mentionnée en haut (à partir de 200 $).
+**Section 1 — Frais de création (one-shot)**
 
-### 2. Section "Code Promo" sur la page Offres
+| Désignation | Montant |
+|---|---|
+| Site vitrine 6 pages (Accueil, Réalisations, Savoir-faire, Témoignages, Offres, Contact) | 200 $ |
+| Hébergement + nom de domaine 1ère année | inclus |
+| Intégration WhatsApp + suivi visiteurs (Google Analytics) | inclus |
+| Optimisation SEO local Kinshasa | inclus |
+| **Sous-total création** | **200 $** |
+| Remise lancement −20 % | −40 $ |
+| **Net à payer création** | **160 $** |
 
-Encadré visible où le visiteur entre un code promo (ex: `JK2026`) → affiche une réduction (-15 % le premier mois ou -50 $ sur la création). Logique côté client uniquement (codes en dur dans le fichier) — pas besoin de backend pour ça. Au clic "Profiter de l'offre", ouvre WhatsApp avec un message pré-rempli qui inclut le code utilisé.
+**Section 2 — Abonnement mensuel (au choix)**
 
-### 3. Bouton WhatsApp pré-rempli (partout sur le site)
+| Formule | Essentielle | Pro |
+|---|---|---|
+| Prix / mois | 20 $ | 45 $ |
+| Hébergement & domaine | ✓ | ✓ |
+| Photos réalisations | 5/mois | illimitées + retouche |
+| Témoignages | ✓ | ✓ |
+| Suivi visites & contacts WhatsApp | ✓ | rapport mensuel détaillé |
+| Modifications texte / prix | ✓ | ✓ + nouvelles sections |
+| SEO Google Kinshasa | — | ✓ |
+| Support | WhatsApp 48h | prioritaire 12h |
+| Campagne promo bannière | — | 1/mois |
 
-Tous les liens `wa.me/...` actuels passent à un format avec message pré-rempli :
+> **Offre de lancement : 1er mois OFFERT** sur la formule choisie.
 
-> "Bonjour, je viens du site JK Service et j'aimerais échanger avec vous au sujet de…"
+**Section 3 — Total à régler aujourd'hui**
 
-Implémenté via une **fonction utilitaire** `buildWhatsAppLink(context)` dans `src/lib/whatsapp.ts` pour qu'on puisse personnaliser le message selon la page (Contact, Réalisations, Offres avec code promo, etc.).
+| | |
+|---|---|
+| Création (remisée) | 160 $ |
+| 1er mois (offert) | 0 $ |
+| **Total** | **160 $** |
 
-Fichiers concernés : `SiteLayout.tsx`, `contact.tsx`, `index.tsx`, `realisations.tsx`, `temoignages.tsx`, `savoir-faire.tsx`, nouvelle page `offres.tsx`.
+**Modalités**
+- Paiement : Mobile Money / espèces / virement (RIB ou n° MoMo à fournir)
+- 50 % à la commande (80 $), 50 % à la mise en ligne
+- Abonnement facturé à partir du 2ᵉ mois
 
-### 4. Tracker simple + page admin cachée
+**Pied de page**
+- Contact Jenovic (tel / WhatsApp / email — *à compléter par toi avant envoi*)
+- Mention : *« Proforma non comptable, vaut accord commercial après signature. »*
+- Signature client + signature prestataire
 
-**Tracker** (sans backend, stockage `localStorage` côté navigateur Jean/toi) :
-- Compte chaque visite de page (avec route + date)
-- Compte chaque clic sur bouton WhatsApp
-- Compte chaque clic sur bouton "Appeler"
-- Stocke les 200 derniers événements
+## Implémentation technique
 
-Implémenté via un hook `useTracker()` + helper `trackEvent(type, meta)`.
+- Script Python avec **ReportLab** (Platypus : tables + paragraphes stylés)
+- Palette sobre : noir, gris, accent ember `#C2410C` (cohérent avec le site)
+- Typo : Helvetica (built-in ReportLab, garantit le rendu)
+- Format A4, marges 2 cm, 1 page (2 max si débord)
+- Sortie : `/mnt/documents/proforma-jk-service.pdf`
+- QA visuelle obligatoire : conversion en image + inspection (lisibilité, alignement tableaux, pas de débord)
 
-**Page admin** : `/admin-jk` (URL non listée dans le menu)
-- Affiche : total visites / 7 derniers jours / 30 jours
-- Clics WhatsApp et Appels (avec pourcentage de conversion)
-- Liste des dernières actions
-- Bouton "Réinitialiser les stats"
-- Petit mot de passe simple en clair côté client (`JKadmin2026`) — pas une vraie sécurité, juste pour éviter qu'un visiteur tombe dessus par hasard
+## Question ouverte (à confirmer avant ou après génération)
 
-> Limite honnête : ce tracker est **côté navigateur**, donc les stats ne sont visibles que sur l'appareil qui a consulté la page admin. Pour des stats globales (tous visiteurs confondus), il faudra plus tard installer Google Analytics gratuit ou activer Lovable Cloud — je te le proposerai après que Jean ait validé cette V1.
+Tes **coordonnées de contact** (téléphone/WhatsApp + email) et ton **moyen de paiement** (n° Mobile Money / RIB) ne sont pas encore donnés. Je peux :
+- soit générer une **v1 avec placeholders** `[Téléphone : …]` que tu remplis à la main,
+- soit attendre que tu me donnes les infos pour une version finale prête à envoyer.
 
-### 5. Lien discret vers `/offres` dans le footer
-
-Pas dans le menu principal (c'est un site pour Jean, pas pour toi) — juste un petit lien "Offres de gestion" dans le footer, utile quand tu envoies l'URL à d'autres prospects artisans.
-
----
-
-## Détails techniques
-
-- Nouveau fichier `src/lib/whatsapp.ts` : `buildWhatsAppLink({ message?: string }): string`
-- Nouveau fichier `src/lib/tracker.ts` : `trackEvent`, `getStats`, `resetStats` (localStorage)
-- Nouveau hook `src/hooks/use-page-tracking.ts` : appelé dans `SiteLayout` pour tracker chaque navigation
-- Nouvelles routes : `src/routes/offres.tsx`, `src/routes/admin-jk.tsx`
-- Modif `SiteLayout.tsx` : remplacer les liens WhatsApp directs par `buildWhatsAppLink()` + ajouter tracking sur les clics tel/whatsapp
-- Modif des autres routes : même remplacement des liens WhatsApp
-- Pas de backend, pas de dépendances ajoutées
+Dis-moi laquelle tu préfères au moment d'implémenter.
