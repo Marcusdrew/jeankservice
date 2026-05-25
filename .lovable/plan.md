@@ -1,78 +1,57 @@
 ## Objectif
 
-Produire un **PDF de proforma** prêt à envoyer par WhatsApp/email à Jean KAKUDJI, présentant l'offre de création + abonnement du site **jeankservice.lovable.app**, avec une offre de lancement attractive pour signer rapidement.
+Régénérer `/mnt/documents/proforma-jk-service-v2.pdf` avec tes nouvelles infos et la nouvelle structure tarifaire (vente site + hébergement séparés, sans remise).
 
-Ce n'est **pas une modification du site** — c'est un livrable (`/mnt/documents/proforma-jk-service.pdf`).
+## Coordonnées (remplissage)
 
-## Contenu de la proforma
+- Jenovic ILAMBU — Tél/WhatsApp : **0817 126 235** — Email : **ilambudj@gmail.com**
+- Paiement Mobile Money uniquement :
+  - **M-Pesa : 0817 126 235**
+  - **Orange Money : 0840 438 754**
+- Suppression complète de la mention RIB / virement bancaire.
 
-**En-tête**
-- Émetteur : Jenovic ILAMBU — Conception & gestion de sites web
-- Client : Jean KAKUDJI — JK Service (Kinshasa)
-- N° proforma : `JKS-2026-001`, date du jour, validité 15 jours
-
-**Objet**
-> Création + gestion du site vitrine professionnel **jeankservice.lovable.app** (portes, fenêtres, portails & vérandas aluminium).
-
-**Section 1 — Frais de création (one-shot)**
+## Section 1 — Création du site (one-shot)
 
 | Désignation | Montant |
 |---|---|
-| Site vitrine 6 pages (Accueil, Réalisations, Savoir-faire, Témoignages, Offres, Contact) | 200 $ |
-| Hébergement + nom de domaine 1ère année | inclus |
-| Intégration WhatsApp + suivi visiteurs (Google Analytics) | inclus |
+| Site vitrine 6 pages (Accueil, Réalisations, Savoir-faire, Témoignages, Offres, Contact) | 250 $ |
+| Intégration WhatsApp + Google Analytics | inclus |
 | Optimisation SEO local Kinshasa | inclus |
-| **Sous-total création** | **200 $** |
-| Remise lancement −20 % | −40 $ |
-| **Net à payer création** | **160 $** |
+| **Net à payer création** | **250 $** |
 
-**Section 2 — Abonnement mensuel (au choix)**
+→ Suppression de la ligne « remise lancement -20 % » et de « 1er mois offert ».
+→ **L'hébergement et le nom de domaine ne sont plus inclus** dans la création : ils font partie de l'abonnement mensuel (c'est la marge récurrente).
+
+## Section 2 — Abonnement mensuel (hébergement + gestion)
 
 | Formule | Essentielle | Pro |
 |---|---|---|
-| Prix / mois | 20 $ | 45 $ |
-| Hébergement & domaine | ✓ | ✓ |
+| Prix / mois | **25 $** | **45 $** |
+| Hébergement & nom de domaine | ✓ | ✓ |
 | Photos réalisations | 5/mois | illimitées + retouche |
-| Témoignages | ✓ | ✓ |
+| Témoignages clients | ✓ | ✓ |
 | Suivi visites & contacts WhatsApp | ✓ | rapport mensuel détaillé |
 | Modifications texte / prix | ✓ | ✓ + nouvelles sections |
 | SEO Google Kinshasa | — | ✓ |
-| Support | WhatsApp 48h | prioritaire 12h |
-| Campagne promo bannière | — | 1/mois |
 
-> **Offre de lancement : 1er mois OFFERT** sur la formule choisie.
+→ Suppression des lignes **Support** et **Campagne promo bannière**.
+→ Pas de 1er mois offert.
 
-**Section 3 — Total à régler aujourd'hui**
+## Section 3 — Total à régler aujourd'hui
 
 | | |
 |---|---|
-| Création (remisée) | 160 $ |
-| 1er mois (offert) | 0 $ |
-| **Total** | **160 $** |
+| Création du site | 250 $ |
+| 1er mois d'abonnement (formule au choix) | 25 $ ou 45 $ |
+| **Total** | **275 $ ou 295 $** |
 
-**Modalités**
-- Paiement : Mobile Money / espèces / virement (RIB ou n° MoMo à fournir)
-- 50 % à la commande (80 $), 50 % à la mise en ligne
-- Abonnement facturé à partir du 2ᵉ mois
+## Modalités
 
-**Pied de page**
-- Contact Jenovic (tel / WhatsApp / email — *à compléter par toi avant envoi*)
-- Mention : *« Proforma non comptable, vaut accord commercial après signature. »*
-- Signature client + signature prestataire
+- Paiement Mobile Money : M-Pesa 0817 126 235 ou Orange Money 0840 438 754
+- 50 % à la commande, 50 % à la mise en ligne
+- Abonnement renouvelable chaque mois
 
-## Implémentation technique
+## Implémentation
 
-- Script Python avec **ReportLab** (Platypus : tables + paragraphes stylés)
-- Palette sobre : noir, gris, accent ember `#C2410C` (cohérent avec le site)
-- Typo : Helvetica (built-in ReportLab, garantit le rendu)
-- Format A4, marges 2 cm, 1 page (2 max si débord)
-- Sortie : `/mnt/documents/proforma-jk-service.pdf`
-- QA visuelle obligatoire : conversion en image + inspection (lisibilité, alignement tableaux, pas de débord)
-
-## Question ouverte (à confirmer avant ou après génération)
-
-Tes **coordonnées de contact** (téléphone/WhatsApp + email) et ton **moyen de paiement** (n° Mobile Money / RIB) ne sont pas encore donnés. Je peux :
-- soit générer une **v1 avec placeholders** `[Téléphone : …]` que tu remplis à la main,
-- soit attendre que tu me donnes les infos pour une version finale prête à envoyer.
-
-Dis-moi laquelle tu préfères au moment d'implémenter.
+- Réutiliser le script ReportLab existant, sortie **`/mnt/documents/proforma-jk-service-v2.pdf`** (on garde v1 intacte)
+- QA visuelle obligatoire (pdftoppm → inspection chaque page)
